@@ -1,0 +1,441 @@
+TinyGFXUpdate
+
+'25 Jul 2012
+'1. Adjust Sub ShowNine to avoid mismatch RTE
+
+' 23 Sep 2011
+' 1. Faint dividing line to separate Visbility from Grid palette.
+
+' 14 July 2011
+' 1. Added a cross shading box in ModDRAW. Varying patterns when image not square!
+
+' 5 July 2011
+' 1. Avoid another RTE for less/more colors with 1 pixel size images
+
+' 4 July 2011
+' 1. Avoid RTE for shifting and flipping 1 pixel size images.
+
+' 7 June 2011
+' Added to ModImage.Function Blur(...):-
+' If ImageWidth(ImageNum) = 1 Or ImageHeight(ImageNum) = 1 Then Exit Function
+' to avoid blurring corners when height or width = 1
+
+' 10 May 2011
+' 1. Put ToolTipText on Visibility and Grid color palettes.
+
+' 28 Apr 2011
+' 1. Ignore Function CheckSize
+
+' 10 Apr 2011
+' 1. Added choice for standard icons only in Extractor
+
+' 24/Mar/10
+' 1. Allow 48x48 cursors as well as 32x32.
+
+'17/Sep/09
+' 1. Correction to Selection on blank image
+' 2. Changed Grey-Relief to LeftColor-Relief
+
+' 14/Sep/09
+' 1. Added palette bmp window
+' 2. Corrected Alpha set after Clipboard Pasting
+'    from a 32bpp image saved to Clipboard.
+
+' 12/Sep/09
+' 1. Added restrict Alpha to Alpha edit menu
+' 2. Corrections to backup of Extracted images
+' 3. Small correction for top-left Border corner
+' 4. Put name first in recent files list
+' 5. Color picked from Alpha edit OC put into LColor.
+
+' 9/Sep/09
+' 1. Fix bug in Alpha edit LoadLast
+
+' 7/Sep/2009
+' 1. Refresh picSmallEdit, partic for Create Alpha
+'    Accept immediately
+' 2. Scrap Reset for rotation when AA button pressed
+' 3. Abandon Alpha fill tool
+
+' 6/Sep/2009
+' 1. Playing with Alpha Fill tool
+' 2. Blacken mask pixels when changing
+'    Alpha to values other than zero
+
+' 3/Sep/2009
+'  Minor update for Viscolor palette black not
+'  dark grey like grid color.  Also mousedown on
+'  Vis palette changed to allow black background.
+
+' 1/Sep/2009 S
+'   Enhanced Alpha edit menus. Several bugs
+'   fixed
+
+' 27/08/09  Added Alpha gradient button
+
+' 25/08/09  Re-arranged 32bpp Effects code
+'           (Blur 48x48 a problem? Solved Int)
+
+' 24/08/09  Boundary correction to Set_LOHI_XY()
+
+' 23/08/09  Simplified Rotator. Added right-click on
+'               Alpha edit screens to pick up an Alpha or a
+'              Color.
+
+' 22/08/09  Correct Border corner transparency
+'                Correct Rotator Reconcile
+
+' 19/08/09  Re-arrange Alpha edit display. Add ATools
+'               Dot, Line, Box, Solid Box
+'               Correction to saving 2 or 3 icons
+
+' 16/08/09  Arrange recover for Mask,Alpha, OC display
+'               in lots of places.
+
+' 15/08/09  Abandon pre-blackening, back to options to Color
+'               transparent area
+
+' 14/08/09  AA Rotate needs pre-blackening and post-Reconcile
+'               Added check for cursor HotSpot
+
+' 13/08/09  Correction to Rotate, Reconcile
+
+' 11/08/09 Corrections to Swap and Stretch with mixed bpps
+' Also Stretching with HALFTONE can change number of colors
+' and hence bpp unless 32bpp'  Check numbers of colors
+' in cmdSelect_MouseUp again for change of colors & bpp.
+' Swap images added swap FileSpec$ not just NameSpec$.
+' For Rotation adjust Alpha to zero where mask is transparent.
+' Slight Adjustment in Alpha edit original colors grid.
+' For Rotation correct when Selection on. Ensure Optimize = 0
+' for 32bpp images
+' Option to blacken transparent surrounds for 32bpp images
+' Re-arranged Rotate & Alpha Screens.
+' Ditched Alpha0,1,2() use DATACUL0,1,2(3,W-1,H-1) (was picDATACUL())
+
+' Update 10 Aug 2009
+
+'1. Added some manipulation of 32bpp images ie with an alpha
+'   channel, including editing, saving, resizing and rotation.
+'   Buttons added to show alpha bytes and original colors.
+'   Also allow alpha channel to be restricted in Preferences,
+'   which sometimes,but not always, can leave an acceptable
+'   24bpp image.
+'2. Added creation method under Alpha menu, for making 32bpp
+'   images from any starting image.  An Example of this is the
+'   32bpp cursor used for the Dropper, called DROPPER32 (VB6 bug
+'   if you try to View the image in Resource Editor)
+'   (see cEnvironment Class for explanation of difference in
+'   IDE and Environment).
+'3  Allow images > 64x64 to be compressed.
+'4. Added Extra transparency square marker by pressing
+'   Transparency button [\].
+'5. Testing the Visibility, Mask or Alpha also colors the
+'   drawing panel as well as the image panes.
+'6. Placed the number of Undos & Max undo numbers on each
+'   image pane.
+
+' Update 1 June 2009
+
+'1. Changed frmText to allow toggling of any ClearType
+'   character smoothing for TrueType and Open fonts
+'2. Altered frmFont to enact Font change in frmText
+'3. Extended Font info on frmText title bar.
+'4. Avoid backup when no action can be taken by Effects
+'   ie where only trying to effect transparency.  Apart
+'   from Border.
+
+' Update 15 May 2009
+
+'1. Added Preference to backup all images (<=20) from
+'   Extractor or just the final transferred images.
+'2. Ensure backup for all icons in a multi-icon file
+'3. Adjusted brighter/darker operations
+'4. Changed picSmallFrame backcolor to &H808080 - darker
+'   and dotted rectangle around image to pink.
+'5. Changed select image mousepointer to up redarrow.
+
+' Update 12 May 2009
+
+'1. Added chm help file
+'2. Added Border effect button
+'3. Some captions and icon ordering changed
+'4. More RGB (Tools 2) in Black catered for
+'5. Allow Left or Right color for Checkerboard
+'   & Horz & Vert lines in Tools 2
+'6. Corrected false boolean for Scroll/Flip buttons
+'7. Altered accept, by mouse-click on drawing panel,
+'   for Effects in a selection or right-click in select
+'   rectangle for Move/Copy selection.  Now only 3
+'   selection buttons.
+'8. Corrected Screen drop out areas when Capturing using
+'   Drawn rectangle.
+'9. Corrected edge error in capturing a Drawn rectangle
+'10.Removed some unused variables
+
+'Update 23 Apr 2009
+
+'1. Adjust Extractor to allow icons down to 1x1
+'   and remove ico height test (ie 2x actual height)
+'   which was cancelling odd height bmps.
+'2. Check if a recent file exists.
+'3. New form for selecting image number for a
+'   recent file.
+
+' Update 14 Apr 2009
+
+'1. Added Recent files list
+
+' Update 23 Oct 2008
+
+'1. Allowed images to be 1x1 to 64x64
+
+' Update 11 May 2008
+
+'1. Allow erase button to make Left or Right color the erase color.
+'2. Changed QueryUnload message.
+'3. Used Move Left,Top,Width,Height
+'4. Adjusted display buttons a bit.
+'5. Added Last Folder opened to INI file
+'6. Re-arranged main vert scrollbar values
+'7. Ensure cmdFlash shows HotXY immediately after loading a cursor.
+'8. Correct Text palette length
+
+' Update 23 Feb 2008
+
+'1. Added New menu item to clear all images.
+'   The X in the panels only clears one image
+'2. Changed exit message.
+
+' Update 1 Jan 2008
+
+'1. Correction for loading jpegs.
+'2. Added open All Files option to Extractor
+
+
+'Update 12 Aug 07
+
+'1. Alternative for faster copy/move selection
+'   @ Shape1 in optTools & picLarge Mouse_Move
+'   showing a border
+'2. Added question about saving on Exit.
+
+' Update 1/8/07
+
+' 1. Correction to division by zero - Sub AdjustBoxPoints.
+
+' Update  19/7/07
+
+'1. Corrected Extractor Goto Next, Goto Previous logic.
+
+' Update 24/6/07
+
+'1. Added 2 diagonal and 2 vert & horz center shading boxes
+'2. Correction in Sub mnuOpenIntoImage for cancelling
+'   shaded option buttons (else possible RTE)
+'3. Adjust shaders optTools2 if aSelect ON
+'4. Correction after cancelling frmSelect
+
+
+' Update 22/6/07 (2)
+
+'1.  Adjusted steps for ellipse horizontal shading
+
+' Update 22/6/07
+
+'1. Extend to 64x64
+'2. Added center, vertical & horizontal shading for boxes
+'   and ellipses
+'3. Update Help.
+
+
+' Update 20/6/07
+
+'2. Rotator Sub Rotate - offset for even dimension(s),
+'   added DrawGrid so small changes can be seen and
+'   save location of form in INI
+'2. Save selected palette to INI file
+'3. BlurTool altered to be more symmetrical.
+
+' Update 18/6/07
+
+'1. Added Rotator menu for rotating at any angle
+'   (-180 to +180 in 5 degree steps).
+'   Whole image or a selection, with or without
+'   anti-aliassing
+'2. Changed Rotate 90 buttons to only act on whole image
+'3. Show color count after Extraction
+
+
+' Update 16/6/07(2)
+
+'1. Correction to left edge of Blur
+
+' Update 16/6/07
+
+'1. Added ani,ocx,ica to extraction dialog
+'2. Added tranparent box reminder.
+'3. Adjust for odd behaviour(?) of picSmall(ImageNum).BackColor
+'   in scrWidth
+'4. Sorted out some BackUps
+'5. Show undo & max undo number
+
+' Update 14/6/07
+
+'1. Added Extractor to get icons, cursors & bmps from:-
+'   bmp,exe,dll,frx,ctx,ico,cur,icl,res files
+'2. Added aSelectDrawn boolean for case where
+'   SelectON is pressed but no rectangle drawn
+'3. Editted Help file.
+
+' Update 7/6/07
+
+'1. Corrections to errant interactions
+'   particularly with SelectOFF
+'2. RColor init to white
+'3. Extend tooltips on selection buttons
+'4. Added Reflectors - relects a select rectangle.
+
+
+' Update 3/6/07
+
+'1. Capture MsgBox made SystemModal
+'2. Added clicking on icon also selects image to edit
+'   picSmall cursor changed to red arrow.  Therefore
+'   changed 'avoid click through' cursor park point
+'3. Amended TURNOFFCURSOR to unconditional.
+
+
+' Update 1/6/07
+
+'1. In ExtractICON make number of icons = 1
+'2. Exit Sub for some menu items that are just comments.
+
+' Update  29/5/07
+
+'1.  Added view hot spot button to Cursor panel
+'2.  Changed black grid lines to RGB(64,64,64)
+'3.  Only backs up Rotate once so Undo goes
+'    back to start
+'4.  Added save picLarge ie gridded image as 24bpp.
+'5.  Adjusted red center lines
+'6.  Put in some missing tooltips.
+
+' Update 25/5/07 (2)
+
+'1.  Recast Rotation calculation.  Only if width
+'    and height are not both odd or not both even
+'    will a pixel reduction be applied
+
+' Update 25/5/07
+
+'1. Set Cursor scrollbar maxes to 31
+'2. Reduce delay on FlashSpot for HotXY setting
+'3. Rotations & Replace Left for Right color will
+'   now act inside any selection rectangle
+'   NB even widths &/or heights will be reduced by
+'   1 pixel to allow rotation about a center.
+
+' Update 24/5/07
+
+'1.  Redesigned interface to give larger pixel boxes
+'2.  Allow Flips & Scolls within selection rectangle
+'3.  Exit Sub if selection rectangle dimensions = 0
+'4.  Grid color added to ini file.
+
+' Update 23/5/07
+
+'1.  New Preferences menu for Optimize saving, Color tone,
+'    Aspect ratio & Marking transparent pixels
+'2.  Plus Ini file for preferences & Grid color
+'3.  Added Capture from Drawn rectangle and allow aspect ratio
+'    to be used for this.
+'4   Allow aspect ratio for Clipboard pasting
+'5   Added optional white stripe to transparent pixels
+'6.  Added System color picker
+'7.  Check for clipbrd.exe in Windows directory as well as
+'    System directory
+'8.  Corrected capture screen response to keyboard.
+
+' Update 19/5/07
+
+'1. Added magnifier to Capture
+
+' Update 18/5/07
+
+'1.  Include option under Stretch.Shrink menu to use
+'    HALFTONE or COLORONCOLOR.  Same setting will apply
+'    to Pasting from ClipBoard
+'2.  Make whole picSmallFrame take test against
+'    different background colors.
+'3.  More tweaks on BackUps
+'4.  aClipboard boolean corrected, QueryUnload added.
+
+' Update  17/5/07
+
+'1.  Clipboard function added
+'2.  Changed default TColor
+'3.  More checks if Erase color in use as LColor or RColor
+'4.  Tweaks on when and when not to Backup image.
+
+' Update 16/5/07
+
+'1.  Show Masks button, white area fully transparent
+'2.  Added Mirror tools
+'3.  Extra checks in CheckFile
+'4.  New Sub PROCESS combining 2 previous Subs PreProcess &
+'    MakeBasicArrays and using a masking array
+'5.  For proper saving TColor is set to 0 in gifPAL()
+'6.  Swaps now have UndoALL else get wrong backup files
+'7.  Separate Erase color and button in Colors panel
+'8.  Changed method of viewing icons & cursor against
+'    other backgound colors.
+
+' Update 14/5/07
+
+'1. Added selection rectangle, draw, delete,move & copy
+'2. cmdSelect added before saving Image num
+'3. 28 Optimized tests done ico,cur,bmp 1,4,8,24 bpp &
+'   saving ico singles, doubles & triples plus
+'   testing 4 cursors 1,4,8,24 bpp and 28 non-optimized
+'   tests.
+'4. Tested Effects in rectangle - setting LOX,HIX,LOY,HIY
+'   for with & without select rectangle
+'5. Changed picLarge cursor to PEN.  Downside is that testing
+'   a cursor works on the form & all picboxes except picLarge
+'6. A character from the Font table can now transfer to
+'   frmText.Text1 text box instead of Clipboard
+'7. Added kill all undo/redos button
+'8. Added Effects drawing Tools.
+
+' Update 11/5/07
+
+'1.  Added Stretch/Shrink from one image pane to another
+'2.  Adjusted position of Tool & Effects buttons
+'    for large fonts (120 dpi)
+'3.  Disable/Enable buttons on loading a picture
+'4.  Remove picSmallPREV() picboxes, now redundant
+'5.  Avoided using Clipboard for Screen capture (thanks Mario)
+'6.  Correction to saving optimized, odd width BMPs
+'7.  Adjust selection rectangle for Capture
+'8.  Removed redundant ocx from vbp file.
+
+' Update 9/5/07
+
+'1.  Added checkbox for switching Grid on/off
+'2.  Added Screen capture
+'3.  Fix for 1bpp & 4bpp odd widths
+'4.  Fixed drag/drop onto correct picbox
+'5.  'No' on form Reload honoured (thanks Ken)
+'6.  Minor adjustments to cmdClear
+'    & picORG re-loading & some tooltips
+'7.  Clearer Line,Box,Ellipse construction shapes.
+
+'Update 7/5/07
+
+'1.  Added Font Table and use in Help.
+'2.  Correction for odd width icons
+'3.  Modified GetTheBitsLong to take the calling form.
+'    In particular for frmText.
+
+

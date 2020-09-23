@@ -1,0 +1,319 @@
+23
+1.  Overview
+2.  Image sizes
+3.  Transparency
+4.  Visibility
+5.  Tools
+6.  Effects Tools
+7.  Reflectors
+8.  Selection
+9.  Text & Font
+10. Other buttons
+11. Bitmaps (BMP)
+12. Cursors (CUR)
+13. Icons (ICO)
+14. GIFS & JPEGS
+15. Preferences
+16. Undo/Redo
+17. Drag-Drop
+18. Stretch/Shrink
+19. Screen capture
+20. Clipboard
+21. Extractor
+22. Rotator
+23. Alpha
+
+1.  Overview
+
+   NOT UPDATED	
+
+   This program is for makng small BMPs, Icons or Cursors.
+   The layout is such that 3 images can be worked on at a
+   time.  The red right arrow selects the working image
+   which will be highlighted by the red number 1,2 or 3.
+   Clicking the icon also selects the working image.
+   Nearly all the buttons have a tooltiptext.  Currently
+   the program is only suitable for True Color setting
+   ie 24 or 32 bit. 
+
+2.  Image sizes
+
+   Width and height can be anything from 1x1 to 64x64.
+
+3.  Transparency
+
+   For icons & cursor a usually unique color has been 
+   selected for the transparent color which will  mark the
+   transparent area of the image.  The button in the Colors 
+   panel, with an eraser, allows transparent areas to be 
+   drawn. These areas can be marked, see Preferences. 
+
+4.  Visibility
+
+   To show an icon or cursor against other background
+   colors hold the mouse down on the Visibility color
+   strip.
+
+5.  Tools
+
+   Drawing is done by holding one of the  mouse buttons
+   down.  Left button for Left color and Right button for
+   Right color.  The Fill and Color picker Tools have their
+   own cursor.  Note that, as it stands, the Color picker
+   also shows the grid color.  The ten shading tools shade
+   from Left to Right color.
+
+   The Rotate 90 Tools act on the whole image as soon as
+   the button is pressed.
+   
+    Tools 2
+
+   These are used like the other Tools but operate over a
+   small area as the mouse is moved.  They will not change
+   transparent pixels apart from the Checkerboard,
+   Horizontal & Vertical Line Tools.
+
+6.  Effects Tools
+
+   The 7 Effects buttons operate as soon as the button is pressed. 
+   Also if a selection rectangle is on they only act inside it. 
+   To fix the effects click on the Drawing panel. However the
+   Border and Relace color operations act immediately 
+   (See Selection).
+
+    Mirrors
+
+   The 4 Mirrors act in the same way as the Effects buttons.
+
+7.  Reflectors
+ 	
+   The 4 reflectors only act when a select rectangle is on.
+   They reflect the pattern inside to outside the rectangle.
+
+8.  Selection
+
+   There are 3 buttons for dealing with a selection. 
+
+   Select ON:  Cursor changes to a cross and a selection
+   rectangle can be drawn with the mouse. When pressed
+   again this cancels the operation.(See Effects)
+
+   Move Selection: Cursor changes to a 4-way arrow and
+   the selection can be moved with the Left mouse button 
+   held down.  The Right mouse button fixes the position.
+   Any of the Tools button etc cancels the operation. 
+   The space left behind is filled with the transparent color.
+
+   Copy Selection: as Move Selection except that the space
+   left behind is unchanged.
+
+9.  Text & Font
+
+   Text brings up a separate window in which a single line
+   of text can be entered and moved around with the arrow
+   buttons for a preview before accepting. Text takes the
+   Left color which can be changed on the Text window.
+   The text line can also be moved around with the arrow
+   keys.
+
+   A Font Table is included in the Text window.  It will
+   open up with the same font that was selected.  By
+   clicking on the Table, that character is transferred
+   to the frmText text box. Note that not all fonts
+   are transferred exactly the same.
+
+   ClearType can be toggled on for True Type & Open fonts.
+  
+10. Other buttons
+
+   Black arrows: at the top left of the large edit window
+   - scroll and flip the image.  These can also act just
+   in a selection rectangle, whence a click on the drawing
+   panel is needed to fix them.
+
+   Clear [X]:  clears the image to the transparent color
+   and kills undo files for that image.
+
+   Reload [R]: loads back any original opened file and
+   also kills undo files.
+
+   Palette buttons [0,1,2,3,4]: changes the main palette
+   to a different color set.  Colors are changed by 
+   clicking on the palette strips.  A standard system
+   color picker is included. On the main palette.
+   Left or Right click for Left or Right color.
+
+   Erase button (to the right of the palette) Left/Right click
+   sets Left/Right color to Erase color.
+
+   Grid On/Off checkbox.
+
+   Mask button:  This shows the transparency mask where
+   white is completely transparent and black partially
+   or non-transparent ie does not show an alpha mask.
+	
+11. Bitmaps (BMP)
+
+   These will always be a single image and can be opened
+   into any of the image panes 1, 2 or 3.  
+
+12. Cursors (CUR)
+
+   Only 32 x 32 images can be saved as a cursor (CUR), 
+   and the active point of the cursor (HotX, HoyY) can
+   be set by the Cursor scrollbars. The Cursor menu has
+   the facility to test a cursor (or icon), by first loading it 
+   from a cursor (or icon) file, and cancelling that cursor.
+
+13. Icons (ICO)
+
+   Up to 3 icons can be extracted from a multi-icon file.
+   Vista icons, containing onky PNG segments, cannot be
+   read by this program. Single image panes, panes 1 & 2
+   or 1 & 2 & 3 can be saved as a single or multi-icon file.
+   Saving all 3 icons at the standard sizes (16x16, 32x32 & 
+   48x48) and using  those as the main form icon will allow
+   the exe file to  display the correctly sized icon in 
+   Windows Explorer.
+
+14. GIFS & JPEGS
+
+   Can be read but not saved as a GIF or JPEG.  There is
+   no great advantage with small images.
+
+15. Preferences
+
+    Optimized saving   
+
+   The default saving optimizes according to the number
+   of colors in the image.  So a 2 color image can be
+   saved as 1 bpp, up to 16 colors 4 bpp, up to 256
+   colors 8 bpp and 24 bpp beyond that.  Optimization
+   can be switched off whence saving will be 24 bpp for
+   BMPs and 8 bpp for the rest.  
+
+    Color mode   
+
+   There is an option to set the color mode to HALFTONE
+   or COLORONCOLOR.  HALFTONE interpolates between 
+   different colors whereas COLORONCOLOR  deletes or 
+   simply adds in extra pixels of the same colors as
+   the source image. Both have their pros & cons.  
+   This setting is also used by the Clipboard when 
+   pasting an image.
+   COLORONCOLOR can be better for simple images where
+   an exact copy is wanted, whereas HALFTONE doesn't
+   lose pixels and is more realistic for complex pictures.
+   In general, better to leave it at HALFTONE.
+
+    Aspect ratio
+
+   For Capturing from a drawn rectangle and for
+   Clipboard pasting, the aspect ratio can be set
+   or ignored.
+
+    Marked pixels
+
+   Optionally mark transparent pixels with a white
+   diagonal line or a white square.
+
+    GFX.INI file
+
+   Upto 8 Recent files are saved first in the INI file.
+   Then the Last Opened Folder followed by the
+   Preferences, Grid color, the Selected Palette and
+   the Location of the Rotator Window.
+   When the opened files exceed 8 they overwrite from
+   the beginning of the list.
+
+16. Undo/Redo
+
+   The number of Undo/Redo levels is somewhat arbitrary
+   and has been set at 20.  The system works by saving
+   files to the application folder. They are named :-
+
+     SAV(Image number)(gen number).dat
+
+   and are deleted when the program is exitted.  The
+   first two entries are the width and height of the
+   image followed by 32 bpp 2D array elements. In the
+   source code the Undo levels are set in Form_Initialize.
+
+   The Undo all button deletes the SAV files for that
+   image. fixes the current image and backs it up.
+   The undo number & maximum undo number are shown
+   above the image pane.
+   
+17. Drag-Drop
+
+   Picture files can be dropped onto the exe or onto one
+   of the image panes of the running program.
+
+18. Stretch/Shrink
+
+   This stretches or shrinks the image in one pane to
+   another and uses the preferred color mode.
+
+19. Screen capture
+
+   Menu item to capture into one of the 3 image panes.
+   The magnification (x1, x2, x4) can also be set on
+   this menu if wanted.  When in Capture mode the
+   Spacebar Captures and the Esc key Cancels. The
+   window, showing the magnified image, can be moved
+   with the mouse.  
+
+   Alternatively the image, within a drawn rectangle, 
+   can be captured.  The Spacebar captures and the Esc 
+   key cancels. Additionally for this, the aspect ratio
+   can be kept or ignored.
+
+20. Clipboard
+   
+   Menu items to copy to and from the Clipboard for any
+   of the image panes.  Also View & Clear Clipboard.
+   Pasting uses the preferred color mode and aspect
+   ratio.
+
+21. Extractor
+
+   Menu brings up the Extractor window.  OPEN to extract
+   icons, cursors or bmps from files:
+   bmp,exe,dll,frx,ctx,ico,cur,icl,res,ani,ocx,ica
+   and All Files option.
+
+   Caviats:
+   1. Only for images 1x1 to 64x64
+   2. Does not distinguish between icons and cursors
+      so a cursor Hot spot will need resetting if wanted
+   3. The method relies on matching the pattern
+      "40000"  for a bitmap info header (BMIH) and then
+      establishing whether it is a bmp or icon(cursor).
+      This method enables icons to be extracted even
+      when the standard icon header is different.
+      Occasionally it will get a false positive where
+      a string of bytes happens to get through the
+      pattern filter but is not a valid icon.  This
+      will give a random or partial image and can be
+      ignored
+
+22. Rotator
+   
+   Menu brings up the Rotator window for the currently
+   selected image, with or without a selected rectangle.
+   Rotation varies in steps of 5 degrees from -180 to +180.
+   Note that this does not swap the overall width & height,
+   unlike the Rotate 90 tools.  This can give unexpected
+   results when the center point is off pixel. The vacated
+   space left by a rotation can be left unchanged, filled
+   with the transparent or Right color.  The Show button 
+   gives a preview and when satisfactory, press the 
+   Accept/Close button.
+
+23. Alpha
+
+   This menu allows the Alpha value and Original colors for
+   32bpp images to be created or changed. Smaller Alpha 
+   values allow merging with the background and an be 
+   tested, back on the main  screen, by pressing one of the
+   Visibilty colors.
